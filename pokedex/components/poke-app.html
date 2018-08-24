@@ -1,0 +1,41 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="poke-dex-page.html">
+<link rel="import" href="poke-form-page.html">
+<link rel="import" href="poke-kalos-page.html">
+<link rel="import" href="poke-kanto-page.html">
+<dom-module id="poke-app">
+  <template>
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/" active="{{homeActive}}"></app-route>
+    <app-route route="{{route}}" pattern="/poke-new" active="{{newActive}}"></app-route>
+    <app-route route="{{route}}" pattern="/regions/kalos" active="{{kalosActive}}"></app-route>
+    <app-route route="{{route}}" pattern="/regions/kanto" active="{{kantoActive}}"></app-route>
+    <main>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/poke-new">New Pokemon</a>
+        <a href="/regions/kalos">Kalos</a>
+        <a href="/regions/kanto">Kanto</a>
+      </nav>
+      <poke-dex-page active={{homeActive}}></poke-dex-page>
+      <poke-form-page active="{{newActive}}"></poke-form-page>
+      <poke-kalos-page active="{{kalosActive}}"></poke-kalos-page>
+      <poke-kanto-page active="{{kantoActive}}"></poke-kanto-page>
+    </main>
+    </poke-container>
+  </template>
+  <script>
+    class PokeApp extends Polymer.Element {
+      static get is () {
+        return 'poke-app'
+      }
+      ready () {
+        super.ready()
+        console.log(this.route)
+      }
+    }
+    customElements.define(PokeApp.is, PokeApp)
+  </script>
+</dom-module>

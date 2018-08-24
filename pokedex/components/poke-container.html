@@ -1,0 +1,20 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<dom-module id="poke-container">
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 0 2rem;
+      }
+    </style>
+    <slot>You must put content here</slot>
+  </template>
+  <script>
+    class PokeContainer extends Polymer.Element {
+      static get is () {
+        return 'poke-container'
+      }
+    }
+    customElements.define(PokeContainer.is, PokeContainer)
+  </script>
+</dom-module>

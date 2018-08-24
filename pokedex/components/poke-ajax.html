@@ -1,0 +1,68 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<dom-module id="poke-ajax">
+  <script>
+    class PokeAjax extends Polymer.Element {
+      static get is () {
+        return 'poke-ajax'
+      }
+
+      static get properties () {
+        return {
+          auto: {
+            type: Boolean,
+            value: false
+          },
+          url: {
+            type: String,
+            observer: '_changeUrl'
+          },
+          handleAs: {
+            type: String,
+            value: 'json'
+          }
+        }
+      }
+
+      _changeUrl (newUrl, oldUrl) {
+        if (!this.auto) {
+          return
+        }
+        this.makeRequest()
+      }
+
+      makeRequest () {
+        if (!this.url) {
+          return
+        }
+
+        return fetch(this.url)
+          .then( response => response[this.handleAs]())
+          .then( response => {
+            this._triggerResponse(response)
+            return response
+          })
+          .catch(error => {
+            this._triggerError(error)
+            return Promise.reject(error)
+          })
+      }
+
+      _triggerResponse (response) {
+        const onResponse = new CustomEvent('on-response', {
+            detail: response
+          })
+        this.dispatchEvent(onResponse)
+        console.log(response)
+      }
+
+      _triggerError (error) {
+        const onError = new CustomEvent('on-error', {
+            detail: error
+          })
+        this.dispatchEvent(error)
+        console.error(error)
+      }
+    }
+    customElements.define(PokeAjax.is, PokeAjax)
+  </script>
+</dom-module>

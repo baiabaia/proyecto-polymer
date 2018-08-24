@@ -1,0 +1,21 @@
+<link rel="import" href="poke-button.html">
+<link rel="import" href="poke-label.html">
+<script>
+  class PokeCard extends HTMLElement {
+    constructor () {
+      super()
+      const shadow = this.attachShadow({mode: 'open'})
+      shadow.innerHTML = `
+        <style>
+          :host {
+            display: block;
+          }
+        </style>
+        <button is="poke-button" name=""></button>
+        <poke-label name=""></poke-label>
+      `
+    }
+  }
+
+  window.customElements.define('poke-card', PokeCard)
+</script>

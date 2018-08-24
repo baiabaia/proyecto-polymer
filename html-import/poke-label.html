@@ -1,0 +1,20 @@
+<script>
+  class PokeLabel extends HTMLElement {
+    constructor () {
+      super()
+      const shadow = this.attachShadow({ mode: 'open' })
+      shadow.innerHTML = '<span>Pokelabel in the shadows</span>'
+    }
+
+    get name () {
+      return this.getAttribute('name')
+    }
+    set name (newName) {
+      this.setAttribute('name', newName)
+    }
+  }
+
+  window.customElements.define('poke-label', PokeLabel)
+  window.customElements.whenDefined('poke-label')
+    .then(() => console.log('poke-label defined'))
+</script>

@@ -1,0 +1,82 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<dom-module id="poke-form">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-form id="pokeForm" on-iron-form-presubmit="_onSubmit">
+      <form>
+        <paper-input always-float-label label="ID" name="id" placeholder="100" type="number" auto-validate pattern="[0-9]*" error-message="Este campo solo debe contener numeros"></paper-input>
+        <paper-input always-float-label label="Nombre Pokemon" name="name" placeholder="Bulbasaur" auto-validate pattern="[a-zA-Z]*" error-message="Este campo solo debe contener letras!"></paper-input>
+        <paper-input always-float-label label="Imagen Pokemon" name="icon" placeholder="http://host.com/image.png" type="url"></paper-input>
+        <paper-dropdown-menu always-float-label label="Region" name="region">
+          <paper-listbox slot="dropdown-content" selected="0">
+            <paper-item>Kanto</paper-item>
+            <paper-item>Kalos</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <paper-dropdown-menu label="Tipo Pokemon" name="type">
+          <paper-listbox slot="dropdown-content" selected="0">
+            <paper-item>Plant</paper-item>
+            <paper-item>Fire</paper-item>
+            <paper-item>Water</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <div>
+          <paper-button raised on-click="_submitForm">Guardar</paper-button>
+        </div>
+      </form>
+    </iron-form>
+  </template>
+  <script>
+    class PokeForm extends Polymer.Element {
+      static get is () {
+        return 'poke-form'
+      }
+
+      _onSubmit (event) {
+        event.preventDefault()
+        const ironForm = event.target
+        const pokemon = ironForm.serializeForm()
+        pokemon.battles = []
+        pokemon.captured = false
+        this._savePokemon(pokemon)
+      }
+
+      _savePokemon (pokemon) {
+        const region = pokemon.region
+        delete pokemon.region
+        const url = 'http://localhost:3000/'+region
+        const config =  {
+          method: 'POST',
+          body: JSON.stringify(pokemon),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }
+        fetch(url, config)
+          .then(response => {
+            this.$.pokeForm.reset()
+            console.log(response)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+
+      _submitForm () {
+        this.shadowRoot.querySelector('#pokeForm').submit()
+      }
+    }
+    customElements.define(PokeForm.is, PokeForm)
+  </script>
+</dom-module>

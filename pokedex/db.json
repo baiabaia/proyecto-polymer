@@ -1,0 +1,54 @@
+{
+  "kanto": [
+    {
+        "id": 1,
+        "name":"Bulbasaur",
+        "type": "plant",
+        "icon":"https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+        "battles": [],
+        "captured": false
+      },
+      {
+        "id": 2,
+        "name": "Charmander",
+        "icon": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
+        "type": "fire",
+        "battles": [],
+        "captured": false
+      },
+      {
+        "id": 3,
+        "name": "Squirtle",
+        "icon": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png",
+        "type": "water",
+        "battles": [],
+        "captured": false
+      }
+  ],
+  "kalos": [
+    {
+        "id": 1,
+        "name":"Chespin",
+        "type": "plant",
+        "icon":"https://assets.pokemon.com/assets/cms2/img/pokedex/full/650.png",
+        "battles": [],
+        "captured": false
+      },
+      {
+        "id": 2,
+        "name": "Fennekin",
+        "icon": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/653.png",
+        "type": "fire",
+        "battles": [],
+        "captured": false
+      },
+      {
+        "id": 3,
+        "name": "Froakie",
+        "icon": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/656.png",
+        "type": "water",
+        "battles": [],
+        "captured": false
+      }
+  ]
+}

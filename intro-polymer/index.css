@@ -1,0 +1,7 @@
+* {
+  box-sizing: border-box
+}
+
+:root {
+  --theme-color:rgba(0, 0, 255, 0.7);
+}

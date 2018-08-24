@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="poke-region.html">
+<dom-module id="poke-kalos-page">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+      :host([active]) {
+        display: block;
+      }
+    </style>
+    <poke-region base-url="http://localhost:3000" region="kalos"></poke-region>
+  </template>
+  <script>
+    class PokeKalosPage extends Polymer.Element {
+      static get properties () {
+        return {
+          active: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          }
+        }
+      }
+      static get is () {
+        return 'poke-kalos-page'
+      }
+    }
+    customElements.define(PokeKalosPage.is, PokeKalosPage)
+  </script>
+</dom-module>

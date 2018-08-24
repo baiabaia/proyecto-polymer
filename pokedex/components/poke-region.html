@@ -1,0 +1,59 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="poke-list.html">
+<dom-module id='poke-region'>
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-ajax
+      auto
+      url="[[baseUrl]]/[[region]]"
+      handle-as="json"
+      on-response="_loadPokemons"
+      on-error="_handleError"
+    >
+    </iron-ajax>
+    <poke-list filter="[[filter]]" pokemons="[[pokemons]]" on-pokemon-click="_capturePokemon">
+      <h2 slot="title" class="title">Pokedex oficial de [[region]]</h2>
+    </poke-list>
+  </template>
+  <script>
+    class PokeRegion extends Polymer.Element {
+      static get properties () {
+        return {
+          pokemons: {
+            type: Array,
+            value: function () {
+              return []
+            },
+            readOnly: true
+          },
+          baseUrl: String,
+          region: String,
+          filter: String,
+        }
+      }
+
+      static get is () {
+        return 'poke-region'
+      }
+
+      _capturePokemon (event) {
+        const model = event.detail
+        model.set('pokemon.captured', true)
+      }
+
+      _handleError (event, request) {
+          console.error(request.error)
+        }
+
+      _loadPokemons (event) {
+        this._setPokemons(event.detail.response)
+      }
+    }
+    customElements.define(PokeRegion.is, PokeRegion)
+  </script>
+</dom-module>

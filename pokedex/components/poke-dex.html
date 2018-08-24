@@ -1,0 +1,41 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="poke-region.html">
+<link rel="import" href="poke-search.html">
+<link rel="import" href="poke-container.html">
+<dom-module id="poke-dex">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <poke-container>
+      <poke-search on-search="_search"></poke-search>
+      <poke-region filter="[[search]]" base-url="http://localhost:3000" region="kanto"></poke-region>
+      <poke-region filter="[[search]]" base-url="http://localhost:3000" region="kalos"></poke-region>
+    </poke-container>
+  </template>
+  <script>
+    class PokeDex extends Polymer.Element {
+      static get properties () {
+        return {
+          search: {
+            type: String,
+            notify: true,
+            value: ''
+          }
+        }
+      }
+
+      static get is () {
+        return 'poke-dex'
+      }
+
+      _search (event) {
+        event.stopPropagation()
+        this.set('search', event.detail.search)
+      }
+    }
+    customElements.define(PokeDex.is, PokeDex)
+  </script>
+</dom-module>

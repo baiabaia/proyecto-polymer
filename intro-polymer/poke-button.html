@@ -1,0 +1,40 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="poke-button">
+  <template>
+      <style>
+          :host {
+            display: block;
+          }
+          .poke-container {
+            border: none;
+            display: block;
+            height: 100%;
+            padding: 0.5rem;
+          }
+          .poke-avatar {
+            height: auto;
+            max-width: 90%;
+          }
+        </style>
+    <button class="poke-container">
+      <img class="poke-avatar" src="http://pixelartmaker.com/art/3f100623ee8b17c.png" alt="[[name]]" >
+    </button>
+  </template>
+  <script>
+    class PokeButton extends Polymer.Element {
+      static get properties() {
+        return {
+          name: String,
+          type: {
+            type: String,
+            value: 'plant'
+          }
+        }
+      }
+      static get is() {
+        return 'poke-button'
+      }
+    }
+    customElements.define(PokeButton.is, PokeButton)
+  </script>
+</dom-module>

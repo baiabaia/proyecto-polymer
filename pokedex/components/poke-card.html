@@ -1,0 +1,69 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="poke-button.html">
+<link rel="import" href="poke-label.html">
+<dom-module id="poke-card">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        border-width: 1px;
+        border-color: black;
+        border-style: solid;
+      }
+      .container {
+        background-color: bisque;
+        min-width: 160px;
+        min-height: 160px;
+        position: relative;
+      }
+      poke-label {
+        position: absolute;
+        bottom: 0;
+      }
+      poke-button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    </style>
+    <div class="container">
+      <poke-button pokemon="{{pokemon}}"></poke-button>
+      <poke-label name="[[pokemon.name]]"></poke-label>
+    </div>
+    <template is="dom-if" if="{{pokemon.captured}}">
+      <span>[[winBattles]]</span>
+    </template>
+    <template is="dom-if" if="{{!pokemon.captured}}">
+        <span>Wild Pokemon</span>
+      </template>
+  </template>
+  <script>
+    class PokeCard extends Polymer.Element {
+      static get properties() {
+        return {
+          pokemon: {
+            type: Object
+          },
+          winBattles: {
+            type: String,
+            computed: "_calculateWins(pokemon)"
+          }
+        }
+      }
+
+      _calculateWins (pokemon) {
+        const battles = pokemon.battles
+        const winBattles = battles.filter((result) => result=== 'w')
+        return winBattles.length + "/" + battles.length
+      }
+
+      static get is() {
+        return 'poke-card'
+      }
+    }
+    customElements.define(PokeCard.is, PokeCard);
+  </script>
+</dom-module>

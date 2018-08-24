@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="poke-dex.html">
+<dom-module id="poke-dex-page">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+      :host([active]) {
+        display: block;
+      }
+    </style>
+    <poke-dex></poke-dex>
+  </template>
+  <script>
+    class PokeDexPage extends Polymer.Element {
+      static get properties () {
+        return {
+          active: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          }
+        }
+      }
+      static get is () {
+        return 'poke-dex-page'
+      }
+    }
+    customElements.define(PokeDexPage.is, PokeDexPage)
+  </script>
+</dom-module>

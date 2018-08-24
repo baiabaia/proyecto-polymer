@@ -1,0 +1,23 @@
+<script>
+  class PokeLabel extends HTMLElement {
+    constructor () {
+      super()
+      const shadow = this.attachShadow({ mode: 'open' })
+      const currentScript = document._currentScript || document.currentScript
+      const currentDocument = currentScript.ownerDocument
+      const pokeLabelTemplate = currentDocument.querySelector('#poke-label-template')
+      shadow.appendChild(pokeLabelTemplate.content.cloneNode(true))
+    }
+
+    get name () {
+      return this.getAttribute('name')
+    }
+    set name (newName) {
+      this.setAttribute('name', newName)
+    }
+  }
+
+  window.customElements.define('poke-label', PokeLabel)
+  window.customElements.whenDefined('poke-label')
+    .then(() => console.log('poke-label defined'))
+</script>

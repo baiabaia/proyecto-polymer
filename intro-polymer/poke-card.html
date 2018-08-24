@@ -1,0 +1,52 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/poke-button.html">
+<link rel="import" href="/poke-label.html">
+<dom-module id="poke-card">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        border-width: 1px;
+        border-color: black;
+        border-style: solid;
+      }
+      .container {
+        background-color: bisque;
+        min-width: 160px;
+        min-height: 160px;
+        position: relative;
+      }
+      poke-label {
+        position: absolute;
+        bottom: 0;
+      }
+      poke-button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    </style>
+    <div class="container">
+      <poke-button name="[[name]]"></poke-button>
+      <poke-label name="[[name]]"></poke-label>
+    </div>
+  </template>
+  <script>
+    class PokeCard extends Polymer.Element {
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            reflectToAttribute: true
+          }
+        }
+      }
+      static get is() {
+        return 'poke-card'
+      }
+    }
+    customElements.define(PokeCard.is, PokeCard);
+  </script>
+</dom-module>
